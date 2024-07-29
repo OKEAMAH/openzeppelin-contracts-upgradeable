@@ -163,6 +163,13 @@ contract Base64DirtyUpgradeableWithInit is Base64DirtyUpgradeable {
         __Base64Dirty_init();
     }
 }
+import "./BatchCallerUpgradeable.sol";
+
+contract BatchCallerUpgradeableWithInit is BatchCallerUpgradeable {
+    constructor() payable initializer {
+        __BatchCaller_init();
+    }
+}
 import "./CallReceiverMockUpgradeable.sol";
 
 contract CallReceiverMockUpgradeableWithInit is CallReceiverMockUpgradeable {
@@ -511,6 +518,13 @@ contract GovernorWithParamsMockUpgradeableWithInit is GovernorWithParamsMockUpgr
         __GovernorWithParamsMock_init();
     }
 }
+import "./MerkleProofCustomHashMockUpgradeable.sol";
+
+contract MerkleProofCustomHashMockUpgradeableWithInit is MerkleProofCustomHashMockUpgradeable {
+    constructor() payable initializer {
+        __MerkleProofCustomHashMock_init();
+    }
+}
 import "./MerkleTreeMockUpgradeable.sol";
 
 contract MerkleTreeMockUpgradeableWithInit is MerkleTreeMockUpgradeable {
@@ -705,6 +719,13 @@ import "./token/ERC20ForceApproveMockUpgradeable.sol";
 contract ERC20ForceApproveMockUpgradeableWithInit is ERC20ForceApproveMockUpgradeable {
     constructor() payable initializer {
         __ERC20ForceApproveMock_init();
+    }
+}
+import "./token/ERC20GetterHelperUpgradeable.sol";
+
+contract ERC20GetterHelperUpgradeableWithInit is ERC20GetterHelperUpgradeable {
+    constructor() payable initializer {
+        __ERC20GetterHelper_init();
     }
 }
 import "./token/ERC20MockUpgradeable.sol";
@@ -925,6 +946,13 @@ import "../token/ERC20/ERC20Upgradeable.sol";
 contract ERC20UpgradeableWithInit is ERC20Upgradeable {
     constructor(string memory name_, string memory symbol_) payable initializer {
         __ERC20_init(name_, symbol_);
+    }
+}
+import "../token/ERC20/extensions/draft-ERC20TemporaryApprovalUpgradeable.sol";
+
+contract ERC20TemporaryApprovalUpgradeableWithInit is ERC20TemporaryApprovalUpgradeable {
+    constructor() payable initializer {
+        __ERC20TemporaryApproval_init();
     }
 }
 import "../token/ERC20/extensions/ERC1363Upgradeable.sol";
