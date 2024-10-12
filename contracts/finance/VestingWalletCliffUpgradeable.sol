@@ -8,6 +8,8 @@ import {Initializable} from "../proxy/utils/Initializable.sol";
 
 /**
  * @dev Extension of {VestingWallet} that adds a cliff to the vesting schedule.
+ *
+ * _Available since v5.1._
  */
 abstract contract VestingWalletCliffUpgradeable is Initializable, VestingWalletUpgradeable {
     using SafeCast for *;
@@ -30,8 +32,8 @@ abstract contract VestingWalletCliffUpgradeable is Initializable, VestingWalletU
     error InvalidCliffDuration(uint64 cliffSeconds, uint64 durationSeconds);
 
     /**
-     * @dev Sets the sender as the initial owner, the beneficiary as the pending owner, the start timestamp, the
-     * vesting duration and the duration of the cliff of the vesting wallet.
+     * @dev Set the duration of the cliff, in seconds. The cliff starts vesting schedule (see {VestingWallet}'s
+     * constructor) and ends `cliffSeconds` later.
      */
     function __VestingWalletCliff_init(uint64 cliffSeconds) internal onlyInitializing {
         __VestingWalletCliff_init_unchained(cliffSeconds);

@@ -226,7 +226,7 @@ contract ERC2771ForwarderUpgradeable is Initializable, EIP712Upgradeable, Nonces
      */
     function _recoverForwardRequestSigner(
         ForwardRequestData calldata request
-    ) internal view virtual returns (bool, address) {
+    ) internal view virtual returns (bool isValid, address signer) {
         (address recovered, ECDSA.RecoverError err, ) = _hashTypedDataV4(
             keccak256(
                 abi.encode(
@@ -294,7 +294,7 @@ contract ERC2771ForwarderUpgradeable is Initializable, EIP712Upgradeable, Nonces
 
             uint256 gasLeft;
 
-            assembly {
+            assembly ("memory-safe") {
                 success := call(reqGas, to, value, add(data, 0x20), mload(data), 0, 0)
                 gasLeft := gas()
             }
@@ -317,8 +317,7 @@ contract ERC2771ForwarderUpgradeable is Initializable, EIP712Upgradeable, Nonces
         bool success;
         uint256 returnSize;
         uint256 returnValue;
-        /// @solidity memory-safe-assembly
-        assembly {
+        assembly ("memory-safe") {
             // Perform the staticcall and save the result in the scratch space.
             // | Location  | Content  | Content (Hex)                                                      |
             // |-----------|----------|--------------------------------------------------------------------|
@@ -370,8 +369,7 @@ contract ERC2771ForwarderUpgradeable is Initializable, EIP712Upgradeable, Nonces
             // We explicitly trigger invalid opcode to consume all gas and bubble-up the effects, since
             // neither revert or assert consume all gas since Solidity 0.8.20
             // https://docs.soliditylang.org/en/v0.8.20/control-structures.html#panic-via-assert-and-error-via-require
-            /// @solidity memory-safe-assembly
-            assembly {
+            assembly ("memory-safe") {
                 invalid()
             }
         }

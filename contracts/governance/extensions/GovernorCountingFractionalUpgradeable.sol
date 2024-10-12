@@ -28,6 +28,8 @@ import {Initializable} from "../../proxy/utils/Initializable.sol";
  * * Voting privately from a shielded pool using zero knowledge proofs.
  *
  * Based on ScopeLift's GovernorCountingFractional[https://github.com/ScopeLift/flexible-voting/blob/e5de2efd1368387b840931f19f3c184c85842761/src/GovernorCountingFractional.sol]
+ *
+ * _Available since v5.1._
  */
 abstract contract GovernorCountingFractionalUpgradeable is Initializable, GovernorUpgradeable {
     using Math for *;
@@ -46,7 +48,7 @@ abstract contract GovernorCountingFractionalUpgradeable is Initializable, Govern
         /**
          * @dev Mapping from proposal ID to vote tallies for that proposal.
          */
-        mapping(uint256 => ProposalVote) _proposalVotes;
+        mapping(uint256 proposalId => ProposalVote) _proposalVotes;
     }
 
     // keccak256(abi.encode(uint256(keccak256("openzeppelin.storage.GovernorCountingFractional")) - 1)) & ~bytes32(uint256(0xff))
@@ -168,7 +170,7 @@ abstract contract GovernorCountingFractionalUpgradeable is Initializable, Govern
         uint256 againstVotes = 0;
         uint256 forVotes = 0;
         uint256 abstainVotes = 0;
-        uint256 usedWeight;
+        uint256 usedWeight = 0;
 
         // For clarity of event indexing, fractional voting must be clearly advertised in the "support" field.
         //
